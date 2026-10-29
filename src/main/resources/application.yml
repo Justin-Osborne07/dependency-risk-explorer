@@ -3,8 +3,11 @@ spring:
     name: dependency-risk-explorer
 
 # Our Local Port
+# KEEP ADDRESS, its so only our computers can establish connection
+# Security vulnerabilities otherwise.
 
 server:
+  address: 127.0.0.1
   port: 8080
 
 # Address of Vulnerable API's
