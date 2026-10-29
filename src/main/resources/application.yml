@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: dependency-risk-explorer
+
+# Our Local Port
+
+server:
+  port: 8080
+
+# Address of Vulnerable API's
+# Lim for establishing connection : 5s
+# Lim for response waiting : 10s
+
+
+osv:
+  base-url: https://api.osv.dev
+  connect-timeout: 5s
+  read-timeout: 10s
