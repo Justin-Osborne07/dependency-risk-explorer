@@ -1,0 +1,53 @@
+# generated Spring help file
+HELP.md
+
+# Maven build output and wrapper helper
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# allow folders named target inside source directories
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# allow folders named build inside source directories
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# local environment files
+.env
+.env.*
+!.env.example
+
+# generated logs
+*.log
+
+# operating system files
+.DS_Store
+Thumbs.db
