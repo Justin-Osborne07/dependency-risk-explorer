@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "projectName": "Demo Project",
+  "roots": ["app"],
+  "nodes": [
+    {
+      "id": "app",
+      "ecosystem": "Maven",
+      "name": "demo:application",
+      "version": "1.0"
+    },
+    {
+      "id": "web",
+      "ecosystem": "Maven",
+      "name": "demo:web-library",
+      "version": "1.0"
+    },
+    {
+      "id": "data",
+      "ecosystem": "Maven",
+      "name": "demo:data-library",
+      "version": "1.0"
+    },
+    {
+      "id": "utils",
+      "ecosystem": "Maven",
+      "name": "demo:utilities",
+      "version": "1.0"
+    }
+  ],
+  "edges": [
+    {
+      "from": "app",
+      "to": "web"
+    },
+    {
+      "from": "app",
+      "to": "data"
+    },
+    {
+      "from": "web",
+      "to": "utils"
+    },
+    {
+      "from": "data",
+      "to": "utils"
+    }
+  ]
+}
