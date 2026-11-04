@@ -11,8 +11,8 @@ server:
   port: 8080
 
 # Address of Vulnerable API's
-# Lim for establishing connection : 5s
-# Lim for response waiting : 10s
+# Time Lim for establishing connection : 5s
+# Time Lim for response waiting : 10s
 
 
 osv:
