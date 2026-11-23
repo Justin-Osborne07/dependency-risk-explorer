@@ -108,5 +108,77 @@ class OsvClientTest {
 
         server.verify();
     }
+    @Test
+    void handlesServerError() {
+
+        RestClient.Builder builder = RestClient.builder();
+        MockRestServiceServer server =
+                MockRestServiceServer.bindTo(builder).build();
+
+        OsvClient client = new OsvClient(builder.build());
+
+        server.expect(requestTo("https://api.osv.dev/v1/query"))
+                .andExpect(method(org.springframework.http.HttpMethod.POST))
+                .andRespond(withServerError());
+
+        PackageCoordinate coordinate =
+                new PackageCoordinate("Maven", "example:library", "1.0");
+
+        assertThrows(
+                org.springframework.web.client.HttpServerErrorException.class,
+                () -> client.query(coordinate)
+        );
+
+        server.verify();
+    }
+    @Test
+    void handlesRateLimitError() {
+
+        RestClient.Builder builder = RestClient.builder();
+        MockRestServiceServer server =
+                MockRestServiceServer.bindTo(builder).build();
+
+        OsvClient client = new OsvClient(builder.build());
+
+        server.expect(requestTo("https://api.osv.dev/v1/query"))
+                .andExpect(method(org.springframework.http.HttpMethod.POST))
+                .andRespond(withStatus(
+                        org.springframework.http.HttpStatus.TOO_MANY_REQUESTS
+                ));
+
+        PackageCoordinate coordinate =
+                new PackageCoordinate("Maven", "example:library", "1.0");
+
+        assertThrows(
+                org.springframework.web.client.HttpClientErrorException.class,
+                () -> client.query(coordinate)
+        );
+
+        server.verify();
+    }
+
+    @Test
+    void handlesBadRequestError() {
+
+        RestClient.Builder builder = RestClient.builder();
+        MockRestServiceServer server =
+                MockRestServiceServer.bindTo(builder).build();
+
+        OsvClient client = new OsvClient(builder.build());
+
+        server.expect(requestTo("https://api.osv.dev/v1/query"))
+                .andExpect(method(org.springframework.http.HttpMethod.POST))
+                .andRespond(withBadRequest());
+
+        PackageCoordinate coordinate =
+                new PackageCoordinate("Maven", "invalid:package", "1.0");
+
+        assertThrows(
+                org.springframework.web.client.HttpClientErrorException.class,
+                () -> client.query(coordinate)
+        );
+
+        server.verify();
+    }
 
 }
