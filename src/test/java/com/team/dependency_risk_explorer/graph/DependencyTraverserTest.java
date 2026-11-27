@@ -16,9 +16,22 @@ class DependencyTraverserTest {
     private final PackageCoordinate c = new PackageCoordinate("Maven", "demo:c", "1.0");
 
     @Test
+    void returnsEmptySetForEmptyGraph() {
+        DependencyGraph graph = new DependencyGraph(Set.of(), Map.of());
+        assertEquals(Set.of(), traverser.findReachable(graph));
+    }
+
+    @Test
     void followsDependencyChain() {
         // A -> B -> C
         DependencyGraph graph = new DependencyGraph(Set.of(a), Map.of(a, List.of(b), b, List.of(c)));
+        assertEquals(Set.of(a, b, c), traverser.findReachable(graph));
+    }
+
+    @Test
+    void returnsSharedDependencyOnce() {
+        // A -> C and B -> C, with both A and B as roots
+        DependencyGraph graph = new DependencyGraph(Set.of(a, b), Map.of(a, List.of(c), b, List.of(c)));
         assertEquals(Set.of(a, b, c), traverser.findReachable(graph));
     }
 

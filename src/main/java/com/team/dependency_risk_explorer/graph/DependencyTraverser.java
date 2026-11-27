@@ -5,6 +5,11 @@ import java.util.Set;
 
 public class DependencyTraverser {
 
+    /**
+     * Returns all packages reachable from the graph's roots.
+     * Runs in O(V + E) time for V reachable packages and E dependency edges
+     * leaving those packages.
+     */
     public Set<PackageCoordinate> findReachable(DependencyGraph graph) {
 
         //Empty list of packages
