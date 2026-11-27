@@ -3,7 +3,7 @@
 These are the planned requests and responses shared by the frontend
 and backend. Update this document when the conventions change.
 
-## Conventions
+# Conventions
 
 - All routes start with /api.
 - Request and response bodies use JSON.
